@@ -1,9 +1,15 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import ListaProdutos from "./pages/ListaProdutos"
 
 export function App() {
 
   return (
     <>
-      <h1>Cofigurar Rotas</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<ListaProdutos />}/>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
