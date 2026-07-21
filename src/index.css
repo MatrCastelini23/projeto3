@@ -1,0 +1,77 @@
+@reference "tailwindcss";
+
+/* ==========================================================================
+   Fonte padrão
+   ========================================================================== */
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ==========================================================================
+   Tema claro (padrão) e tema escuro (classe .dark no <html> ou <body>)
+   ========================================================================== */
+body {
+  @apply bg-[#f5f5f5] text-black transition-colors duration-300;
+}
+
+.dark body,
+body.dark {
+  @apply bg-[#00008b] text-white;
+}
+
+/* ==========================================================================
+   Container centralizado
+   ========================================================================== */
+.container-app {
+  @apply w-full max-w-6xl mx-auto px-8 max-lg:px-6 max-sm:px-4;
+}
+
+/* ==========================================================================
+   Grid de produtos
+   ========================================================================== */
+.produtos-grid {
+  @apply grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 gap-6 justify-items-center;
+}
+
+/* ==========================================================================
+   Card de produto
+   ========================================================================== */
+.produto {
+  @apply w-full max-w-xs bg-white text-black rounded-xl shadow-md
+         border border-gray-200 overflow-hidden
+         flex flex-col items-center text-center p-4
+         transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg;
+}
+
+.dark .produto {
+  @apply bg-slate-900 text-white border-slate-700;
+}
+
+.produto img {
+  @apply w-full h-48 object-cover rounded-lg mb-4;
+}
+
+.produto-titulo {
+  @apply text-lg font-bold mb-1;
+}
+
+.produto-descricao {
+  @apply text-sm text-gray-600 mb-3;
+}
+
+.dark .produto-descricao {
+  @apply text-gray-300;
+}
+
+.produto-preco {
+  @apply text-xl font-semibold mb-3;
+}
+
+.produto-botao {
+  @apply w-full bg-[#00008b] text-white py-2 px-4 rounded-lg font-medium
+         hover:opacity-90 transition-opacity duration-200;
+}
+
+.dark .produto-botao {
+  @apply bg-white text-[#00008b];
+}
