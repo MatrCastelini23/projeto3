@@ -1,14 +1,56 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import ListaProdutos from "./pages/ListaProdutos"
+import Main from "./pages/Main"
 
 export function App() {
 
   return (
     <>
       <BrowserRouter>
+        <header className="header-app">
+          <div className="header-content">
+            <span className="header-logo"><img src="/logo_orbita_ecommerce.png" alt="" className="h-25 w-auto object-contain"/></span>
+            <nav className="header-nav">
+              <Link
+                to="/produtos"
+              >Produtos</Link>
+              <a href="#">Ofertas</a>
+              <a href="#">Contato</a>
+            </nav>
+            <div className="header-actions">
+              <button className="header-icon-btn">🔍</button>
+              <button className="header-icon-btn header-cart-badge">
+                🛒 <span className="header-cart-count">3</span>
+              </button>
+            </div>
+          </div>
+        </header>
+
         <Routes>
-          <Route path="/" element={<ListaProdutos />}/>
+          <Route path="/" element={<Main />} />
+          <Route path="/produtos" element={<ListaProdutos/>}/>
         </Routes>
+
+
+        <footer className="footer-app">
+          <div className="footer-content">
+            <div>
+              <h4 className="footer-title">Órbita</h4>
+              <p className="text-sm text-gray-300">Seu universo de compras.</p>
+            </div>
+            <div>
+              <h4 className="footer-title">Ajuda</h4>
+              <div className="footer-links">
+                <a href="#">FAQ</a>
+                <a href="#">Trocas e devoluções</a>
+              </div>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <span>© 2026 Órbita</span>
+            <span>Todos os direitos reservados</span>
+          </div>
+        </footer>
       </BrowserRouter>
     </>
   )

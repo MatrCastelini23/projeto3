@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-
 const produtos = [
     {
         id: 1,
@@ -55,6 +54,7 @@ const produtos = [
 function ListaProdutos() {
     return (
         <>
+            
             <div className="container-app">
                 <h1>Produtos em Destaque</h1>
                 <div className="produtos-grid">

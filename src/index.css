@@ -1,4 +1,4 @@
-@reference "tailwindcss";
+@import "tailwindcss";
 
 /* ==========================================================================
    Fonte padrão
@@ -24,6 +24,67 @@ body.dark {
    ========================================================================== */
 .container-app {
   @apply w-full max-w-6xl mx-auto px-8 max-lg:px-6 max-sm:px-4;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+.header-app {
+  @apply w-full bg-white border-b border-gray-200 sticky top-0 z-50 transition-colors duration-300;
+}
+
+.dark .header-app {
+  @apply bg-[#00008b] border-white/10;
+}
+
+.header-content {
+  @apply w-full max-w-6xl mx-auto px-8 max-lg:px-6 max-sm:px-4
+         flex items-center justify-between py-4;
+}
+
+.header-logo {
+  @apply text-2xl font-bold text-[#00008b] tracking-tight;
+}
+
+.dark .header-logo {
+  @apply text-white;
+}
+
+.header-nav {
+  @apply flex items-center gap-6 text-sm font-medium max-md:hidden;
+}
+
+.header-nav a {
+  @apply text-gray-700 hover:text-[#00008b] transition-colors duration-200;
+}
+
+.dark .header-nav a {
+  @apply text-gray-200 hover:text-white;
+}
+
+.header-actions {
+  @apply flex items-center gap-3;
+}
+
+.header-icon-btn {
+  @apply p-2 rounded-full text-gray-700 hover:bg-gray-100 transition-colors duration-200;
+}
+
+.dark .header-icon-btn {
+  @apply text-white hover:bg-white/10;
+}
+
+.header-cart-badge {
+  @apply relative;
+}
+
+.header-cart-count {
+  @apply absolute -top-1 -right-1 bg-[#00008b] text-white text-[10px] font-semibold
+         w-4 h-4 flex items-center justify-center rounded-full;
+}
+
+.dark .header-cart-count {
+  @apply bg-white text-[#00008b];
 }
 
 /* ==========================================================================
@@ -74,4 +135,38 @@ body.dark {
 
 .dark .produto-botao {
   @apply bg-white text-[#00008b];
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer-app {
+  @apply w-full bg-[#00008b] text-white mt-16 transition-colors duration-300;
+}
+
+.dark .footer-app {
+  @apply bg-black border-t border-white/10;
+}
+
+.footer-content {
+  @apply w-full max-w-6xl mx-auto px-8 max-lg:px-6 max-sm:px-4
+         py-10 grid grid-cols-4 max-md:grid-cols-2 max-sm:grid-cols-1 gap-8;
+}
+
+.footer-title {
+  @apply text-base font-semibold mb-3 text-white;
+}
+
+.footer-links {
+  @apply flex flex-col gap-2 text-sm text-gray-200;
+}
+
+.footer-links a {
+  @apply hover:text-white transition-colors duration-200;
+}
+
+.footer-bottom {
+  @apply w-full max-w-6xl mx-auto px-8 max-lg:px-6 max-sm:px-4
+         border-t border-white/20 py-4 flex items-center justify-between
+         max-sm:flex-col max-sm:gap-2 text-xs text-gray-300;
 }
