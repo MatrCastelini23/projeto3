@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import Button from "../components/button/Button";
 const produtos = [
     {
         id: 1,
@@ -54,7 +54,6 @@ const produtos = [
 function ListaProdutos() {
     return (
         <>
-            
             <div className="container-app">
                 <h1>Produtos em Destaque</h1>
                 <div className="produtos-grid">
@@ -67,7 +66,9 @@ function ListaProdutos() {
                             <Link
                                 to={`/produto/${produto.id}`}
                             >
-                                <button className="produto-botao">Ver detalhes</button>
+                                <Button classe="produto-botao">
+                                    Ver Detalhes
+                                </Button>
                             </Link>
                         </div>
                     ))}
