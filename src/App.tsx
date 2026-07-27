@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import ListaProdutos from "./pages/ListaProdutos"
 import Main from "./pages/Main"
-
 export function App() {
 
   return (
@@ -9,7 +8,10 @@ export function App() {
       <BrowserRouter>
         <header className="header-app">
           <div className="header-content">
-            <span className="header-logo"><img src="/logo_orbita_ecommerce.png" alt="" className="h-25 w-auto object-contain"/></span>
+            <Link
+              to="/">
+              <span className="header-logo"><img src="/logo_orbita_ecommerce.png" alt="" className="h-15 w-auto object-contain"/></span>
+            </Link>
             <nav className="header-nav">
               <Link
                 to="/produtos"
