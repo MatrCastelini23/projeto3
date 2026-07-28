@@ -7,25 +7,36 @@ export function App() {
     <>
       <BrowserRouter>
         <header className="header-app">
-          <div className="header-content">
-            <Link
-              to="/">
-              <span className="header-logo"><img src="/logo_orbita_ecommerce.png" alt="" className="h-15 w-auto object-contain"/></span>
-            </Link>
-            <nav className="header-nav">
-              <Link
-                to="/produtos"
-              >Produtos</Link>
-              <a href="#">Ofertas</a>
-              <a href="#">Contato</a>
-            </nav>
-            <div className="header-actions">
-              <button className="header-icon-btn">🔍</button>
-              <button className="header-icon-btn header-cart-badge">
-                🛒 <span className="header-cart-count">3</span>
-              </button>
+            <div className="header-content">
+                <Link
+                    to={"/"}>
+                    <span className="header-logo"><img src="/logo_orbita_ecommerce.png" alt="" className="object-contain" /></span>
+                </Link>
+                <nav className="header-nav">
+                    <Link
+                        to="/produtos"
+                        className="header-dropDown"
+                    >Produtos</Link>
+                    <Link
+                        to="/ofertas"
+                        className="header-link"
+                    >
+                        Ofertas
+                    </Link>
+                    <Link
+                        to="/contatos"
+                        className="header-link"
+                    >
+                        Contato
+                    </Link>
+                </nav>
+                <div className="header-actions">
+                    <input type="text" className="header-seach" />
+                    <button className="header-icon-btn header-cart-badge">
+                        🛒 <span className="header-cart-count">1</span>
+                    </button>
+                </div>
             </div>
-          </div>
         </header>
 
         <Routes>

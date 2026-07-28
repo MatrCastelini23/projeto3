@@ -1,4 +1,55 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Variáveis globais — ajuste aqui para controlar espaçamentos e tamanhos
+   ========================================================================== */
+:root {
+  /* Container */
+  --container-max-width: 72rem;
+  /* max-w-6xl */
+  --container-padding-x: 2rem;
+  /* px-8 */
+  --container-padding-x-lg: 1.5rem;
+  /* max-lg:px-6 */
+  --container-padding-x-sm: 1rem;
+  /* max-sm:px-4 */
+
+  /* Card de produto */
+  --produto-padding: 1rem;
+  /* p-4 */
+  --produto-gap: 1.5rem;
+  /* gap-6 do grid */
+  --produto-img-height: 12rem;
+  /* h-48 */
+  --produto-img-margin-bottom: 1rem;
+  /* mb-4 */
+  --produto-radius: 0.75rem;
+  /* rounded-xl */
+
+  /* Botões */
+  --botao-padding-y: 0.5rem;
+  /* py-2 */
+  --botao-padding-x: 1rem;
+  /* px-4 */
+  --botao-radius: 0.5rem;
+  /* rounded-lg */
+  --botao-gap: 0.75rem;
+  /* espaço entre botões de paginação */
+
+  /* Header / Footer */
+  --header-padding-y: 1rem;
+  /* py-4 */
+  --header-logo-size: 1.25rem;
+  --header-logo-width: auto;
+  --header-logo-height: 7rem;
+  --footer-padding-y: 2.5rem;
+  /* py-10 */
+  --footer-bottom-padding-y: 1rem;
+  /* py-4 */
+}
 
 /* ==========================================================================
    Fonte padrão
@@ -23,7 +74,22 @@ body.dark {
    Container centralizado
    ========================================================================== */
 .container-app {
-  @apply w-full max-w-6xl mx-auto px-8 max-lg:px-6 max-sm:px-4;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-x);
+}
+
+@media (max-width: 1024px) {
+  .container-app {
+    padding-inline: var(--container-padding-x-lg);
+  }
+}
+
+@media (max-width: 640px) {
+  .container-app {
+    padding-inline: var(--container-padding-x-sm);
+  }
 }
 
 /* ==========================================================================
@@ -38,12 +104,35 @@ body.dark {
 }
 
 .header-content {
-  @apply w-full max-w-6xl mx-auto px-8 max-lg:px-6 max-sm:px-4
-         flex items-center justify-between py-4;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-x);
+  padding-block: var(--header-padding-y);
+  @apply flex items-center justify-between;
+}
+
+@media (max-width: 1024px) {
+  .header-content {
+    padding-inline: var(--container-padding-x-lg);
+  }
+}
+
+@media (max-width: 640px) {
+  .header-content {
+    padding-inline: var(--container-padding-x-sm);
+  }
 }
 
 .header-logo {
-  @apply text-2xl font-bold text-[#00008b] tracking-tight;
+  font-size: var(--header-logo-size);
+  @apply font-bold text-[#00008b] tracking-tight;
+}
+
+.header-logo img{
+  width: var(--header-logo-width);
+  height: var(--header-logo-height);
+  object-fit: contain;
 }
 
 .dark .header-logo {
@@ -79,8 +168,7 @@ body.dark {
 }
 
 .header-cart-count {
-  @apply absolute -top-1 -right-1 bg-[#00008b] text-white text-[10px] font-semibold
-         w-4 h-4 flex items-center justify-center rounded-full;
+  @apply absolute -top-1 -right-1 bg-[#00008b] text-white text-[10px] font-semibold w-4 h-4 flex items-center justify-center rounded-full;
 }
 
 .dark .header-cart-count {
@@ -91,17 +179,40 @@ body.dark {
    Grid de produtos
    ========================================================================== */
 .produtos-grid {
-  @apply grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 gap-6 justify-items-center;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--produto-gap);
+  justify-items: center;
+}
+
+@media (max-width: 1024px) {
+  .produtos-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .produtos-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .produtos-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
 }
 
 /* ==========================================================================
    Card de produto
    ========================================================================== */
 .produto {
-  @apply w-full max-w-xs bg-white text-black rounded-xl shadow-md
-         border border-gray-200 overflow-hidden
-         flex flex-col items-center text-center p-4
-         transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg;
+  width: 100%;
+  max-width: 20rem;
+  /* max-w-xs */
+  padding: var(--produto-padding);
+  border-radius: var(--produto-radius);
+  @apply bg-white text-black shadow-md border border-gray-200 overflow-hidden flex flex-col items-center text-center transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg;
 }
 
 .dark .produto {
@@ -109,7 +220,11 @@ body.dark {
 }
 
 .produto img {
-  @apply w-full h-48 object-cover rounded-lg mb-4;
+  width: 100%;
+  height: var(--produto-img-height);
+  margin-bottom: var(--produto-img-margin-bottom);
+  object-fit: cover;
+  border-radius: calc(var(--produto-radius) - 0.25rem);
 }
 
 .produto-titulo {
@@ -129,12 +244,43 @@ body.dark {
 }
 
 .produto-botao {
-  @apply w-full bg-[#00008b] text-white py-2 px-4 rounded-lg font-medium
-         hover:opacity-90 transition-opacity duration-200;
+  width: 100%;
+  padding-block: var(--botao-padding-y);
+  padding-inline: var(--botao-padding-x);
+  border-radius: var(--botao-radius);
+  @apply bg-[#00008b] text-white font-medium hover:opacity-90 transition-opacity duration-200;
 }
 
 .dark .produto-botao {
   @apply bg-white text-[#00008b];
+}
+
+/* ==========================================================================
+   Paginação
+   ========================================================================== */
+.paginacao {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--botao-gap);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.paginacao-botao {
+  padding-block: var(--botao-padding-y);
+  padding-inline: var(--botao-padding-x);
+  border-radius: var(--botao-radius);
+  @apply bg-[#00008b] text-white font-medium text-sm hover:opacity-90 transition-opacity duration-200 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:opacity-40;
+}
+
+.dark .paginacao-botao {
+  @apply bg-white text-[#00008b];
+}
+
+.paginacao-pagina-atual {
+  @apply text-sm font-semibold px-2;
 }
 
 /* ==========================================================================
@@ -149,8 +295,24 @@ body.dark {
 }
 
 .footer-content {
-  @apply w-full max-w-6xl mx-auto px-8 max-lg:px-6 max-sm:px-4
-         py-10 grid grid-cols-4 max-md:grid-cols-2 max-sm:grid-cols-1 gap-8;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-x);
+  padding-block: var(--footer-padding-y);
+  @apply grid grid-cols-4 max-md:grid-cols-2 max-sm:grid-cols-1 gap-8;
+}
+
+@media (max-width: 1024px) {
+  .footer-content {
+    padding-inline: var(--container-padding-x-lg);
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-content {
+    padding-inline: var(--container-padding-x-sm);
+  }
 }
 
 .footer-title {
@@ -166,7 +328,22 @@ body.dark {
 }
 
 .footer-bottom {
-  @apply w-full max-w-6xl mx-auto px-8 max-lg:px-6 max-sm:px-4
-         border-t border-white/20 py-4 flex items-center justify-between
-         max-sm:flex-col max-sm:gap-2 text-xs text-gray-300;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-x);
+  padding-block: var(--footer-bottom-padding-y);
+  @apply border-t border-white/20 flex items-center justify-between max-sm:flex-col max-sm:gap-2 text-xs text-gray-300;
+}
+
+@media (max-width: 1024px) {
+  .footer-bottom {
+    padding-inline: var(--container-padding-x-lg);
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-bottom {
+    padding-inline: var(--container-padding-x-sm);
+  }
 }
