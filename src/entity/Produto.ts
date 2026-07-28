@@ -11,5 +11,5 @@ export interface Produto{
     price: number;
     description: string;
     category: ProdutoCategoria;
-    image: string;
+    images: string;
 }

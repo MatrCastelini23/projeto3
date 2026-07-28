@@ -1,8 +1,9 @@
-import { Link, useSearchParams,  } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Button from "../components/button/Button";
 import type { Produto } from "../entity/Produto";
 import getProdutcs from "../services/apiProdutos";
 import { useEffect, useState } from "react";
+import ImagemProduto from "../components/ImagemProduto";
 
 
 
@@ -30,7 +31,10 @@ function ListaProdutos() {
                 <div className="produtos-grid">
                     {produtos.map((produto) => (
                         <div className="produto" key={produto.id}>
-                            <img className="produto-img" src={produto.image} alt="" />
+                            <ImagemProduto 
+                                src={produto.images}
+                                alt={produto.title}
+                            />
                             <h2 className="produto-titulo">{produto.title}</h2>
                             <h4 className="produto-preco">Por: R$ {produto.price}</h4>
                             <p className="produto-descricao">{produto.category.name}</p>
