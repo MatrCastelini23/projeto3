@@ -1,47 +1,49 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import ListaProdutos from "./pages/ListaProdutos"
 import Main from "./pages/Main"
+import Produto from "./pages/Produto"
 export function App() {
 
   return (
     <>
       <BrowserRouter>
         <header className="header-app">
-            <div className="header-content">
-                <Link
-                    to={"/"}>
-                    <span className="header-logo"><img src="/logo_orbita_ecommerce.png" alt="" className="object-contain" /></span>
-                </Link>
-                <nav className="header-nav">
-                    <Link
-                        to="/produtos"
-                        className="header-dropDown"
-                    >Produtos</Link>
-                    <Link
-                        to="/ofertas"
-                        className="header-link"
-                    >
-                        Ofertas
-                    </Link>
-                    <Link
-                        to="/contatos"
-                        className="header-link"
-                    >
-                        Contato
-                    </Link>
-                </nav>
-                <div className="header-actions">
-                    <input type="text" className="header-seach" />
-                    <button className="header-icon-btn header-cart-badge">
-                        🛒 <span className="header-cart-count">1</span>
-                    </button>
-                </div>
+          <div className="header-content">
+            <Link
+              to={"/"}>
+              <span className="header-logo"><img src="/logo_orbita_ecommerce.png" alt="" className="object-contain" /></span>
+            </Link>
+            <nav className="header-nav">
+              <Link
+                to="/produtos"
+                className="header-dropDown"
+              >Produtos</Link>
+              <Link
+                to="/ofertas"
+                className="header-link"
+              >
+                Ofertas
+              </Link>
+              <Link
+                to="/contatos"
+                className="header-link"
+              >
+                Contato
+              </Link>
+            </nav>
+            <div className="header-actions">
+              <input type="text" className="header-seach" />
+              <button className="header-icon-btn header-cart-badge">
+                🛒 <span className="header-cart-count">1</span>
+              </button>
             </div>
+          </div>
         </header>
 
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/produtos" element={<ListaProdutos/>}/>
+          <Route path="/produtos" element={<ListaProdutos />} />
+          <Route path="/produto/:produtoId" element={<Produto />} />
         </Routes>
 
 

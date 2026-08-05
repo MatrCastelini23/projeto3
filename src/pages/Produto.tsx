@@ -1,68 +1,53 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom"
+import useFetchProduto from "../services/apiProduto";
+import { ClipLoader } from "react-spinners";
+import ImagemProduto from "../components/ImagemProduto";
 
 
-const produtos = [
-    {
-        id: 1,
-        nome: "Geladeira Frost Free 400L",
-        qtd: 12,
-        preco: 2899.90,
-        descricao: "Geladeira duplex com sistema frost free, painel eletrônico e dispenser de água.",
-        imagem: "geladeira.png"
-    },
-    {
-        id: 2,
-        nome: "Máquina de Lavar Roupa 12kg",
-        qtd: 8,
-        preco: 1799.00,
-        descricao: "Lavadora de roupas com 12 ciclos de lavagem, cesto em inox e função eco.",
-        imagem: "maquina_de_lavar.png"
-    },
-    {
-        id: 3,
-        nome: "Fogão 5 Bocas",
-        qtd: 15,
-        preco: 1299.50,
-        descricao: "Fogão de piso com 5 queimadores, acendimento automático e forno autolimpante.",
-        imagem: "fogao.png"
-    },
-    {
-        id: 4,
-        nome: "Lava-Louças 10 Serviços",
-        qtd: 6,
-        preco: 2399.00,
-        descricao: "Lava-louças compacta com 6 ciclos de lavagem e baixo consumo de água.",
-        imagem: "lava_louca.png"
-    },
-    {
-        id: 5,
-        nome: "Microondas 30L",
-        qtd: 20,
-        preco: 599.90,
-        descricao: "Microondas com grill, painel touch e 10 níveis de potência.",
-        imagem: "microondas.png"
-    },
-    {
-        id: 6,
-        nome: "Cafeteira Elétrica",
-        qtd: 25,
-        preco: 189.90,
-        descricao: "Cafeteira com capacidade para 30 xícaras, corta pingos e desligamento automático.",
-        imagem: "cafeteira.png"
-    }
-];
+function Produto() {
+    const { produtoId } = useParams();
+    const { produto, loading, error } = useFetchProduto(Number(produtoId));
 
-
-function Produto(){
-    const { id } = useParams();
-    const [ item, setItem] = useState([]);
-
-    console.log(id)
-    return(
-        <div className="bg-gray-100 text-gray-900 min-h-screen p-6">
-
+    if (loading) return (
+        <div>
+            <ClipLoader />
         </div>
+    )
+
+    if (error) return (
+        <div>
+            <h1>Erro ao carregar produtos</h1>
+        </div>
+    )
+
+    if (!produto) return (
+        <div>
+            <h1>Produto fora do estoque</h1>
+        </div>
+    )
+
+    return (
+        <>
+            <div className="container">
+                <div className="flex flex-col m-20 items-center justify-center gap-6 p-7 md:flex-row md:gap-8">
+                    <div>
+                        <img
+                            src={produto.images}
+                            alt={produto.slug}
+                            className="rounded-4xl"
+                        />
+                    </div>
+                    <div className="items-center p-1.5 m-2 box-border md:items-start rounded-4xl">
+                        <h1 className="text-3xl font-medium p-1.5">{produto.title}</h1>
+                        <h2 className="text-2xl font-medium p-1.5">{produto.category.name}</h2>
+                        <h3 className="text-2xl font-medium p-1.5">R$ {produto.price}</h3>
+                        <p className="text-1xl font-medium p-1.5">{produto.description}</p>
+                        <button className="bg-blue-800 font-medium m-1 p-1.5 rounded-4xl text-gray-200">Comprar agora</button>
+                        <button className="bg-blue-800 font-medium m-1 p-1.5 rounded-4xl text-gray-200">Colocar no Carrinho</button>
+                    </div>
+                </div>
+            </div>
+        </>
     )
 }
 

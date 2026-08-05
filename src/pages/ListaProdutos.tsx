@@ -1,29 +1,32 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../components/button/Button";
-import type { Produto } from "../entity/Produto";
-import getProdutcs from "../services/apiProdutos";
-import { useEffect, useState } from "react";
 import ImagemProduto from "../components/ImagemProduto";
+import useFetchProdutos from "../services/apiProdutos";
+import { ClipLoader } from "react-spinners";
+import { useState } from "react";
+
+const QTD_POR_PAGINA = 8;
 
 
 
 function ListaProdutos() {
-    const [seachParams] = useSearchParams()
-    const page  = seachParams.get("page");
-    const ITENS_POR_PAGINA = 8;
-    const paginaAtual = Number(page) || 1;
-    const offset = (paginaAtual - 1) * ITENS_POR_PAGINA;
+    const [paginaAtual, setPaginaAtual] = useState(0);
+    const { produtos, loading, error } = useFetchProdutos(paginaAtual, QTD_POR_PAGINA);
 
-    const [produtos, setProdutos] = useState<Produto[]>([]);
+    const goBack = () => (
+        setPaginaAtual((prev) => (prev - 1))
+    )
 
-    useEffect(() => {
-        async function fecthProdutos() {
-            const data = await getProdutcs(offset, ITENS_POR_PAGINA);
-            setProdutos(data);
-        }
-        fecthProdutos();
-    }, [offset])
+    const goForward = () => (
+        setPaginaAtual((prev) => (prev + 1))
+    )
 
+    if (loading) return (<div className="spinner-container flex items-center justify-center h-100">
+        <ClipLoader color="blue" loading={loading} size={50} aria-label="Loading Spinner" />
+    </div>)
+
+    if (error) return (<div>Ocorreu um erro ao carregar </div>)
+    if (!produtos) return null;
 
     return (
         <>
@@ -31,7 +34,7 @@ function ListaProdutos() {
                 <div className="produtos-grid">
                     {produtos.map((produto) => (
                         <div className="produto" key={produto.id}>
-                            <ImagemProduto 
+                            <ImagemProduto
                                 src={produto.images}
                                 alt={produto.title}
                             />
@@ -49,19 +52,21 @@ function ListaProdutos() {
                     ))}
                 </div>
                 <div className="paginacao">
-                    {paginaAtual > 1 && (<Link
-                        to={`/produtos?page=${paginaAtual - 1}`}
-                    >
-                        <button className="paginacao-botao">Anterior</button>
-                    </Link>)}
-                    <span className="paginacao-pagina-atual">Pagina Atual: {paginaAtual}</span>
-                    {produtos.length === ITENS_POR_PAGINA && (
-                        <Link
-                            to={`/produtos?page=${paginaAtual + 1}`}
+                    {paginaAtual >= 1 ?
+                        <button
+                            className="paginacao-botao"
+                            onClick={goBack}
                         >
-                            <button className="paginacao-botao">Próximo</button>
-                        </Link>
-                    )}
+                            Anterior
+                        </button>
+                        : null}
+                    <h1 className="paginacao-pagina-atual">Pagina atual: {paginaAtual + 1}</h1>
+                    <button
+                        className="paginacao-botao"
+                        onClick={goForward}
+                    >
+                        Proximo
+                    </button>
                 </div>
             </div>
         </>
