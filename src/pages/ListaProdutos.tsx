@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import Button from "../components/button/Button";
 import ImagemProduto from "../components/ImagemProduto";
-import useFetchProdutos from "../services/apiProdutos";
-import { ClipLoader } from "react-spinners";
+import useFetchProdutos from "../api/apiProdutos";
 import { useState } from "react";
+import Loading from "../components/screenEffect/Loading";
+import ErrorMessage from "../components/screenMessages/ErrorMessage";
 
 const QTD_POR_PAGINA = 8;
 
@@ -21,11 +22,11 @@ function ListaProdutos() {
         setPaginaAtual((prev) => (prev + 1))
     )
 
-    if (loading) return (<div className="spinner-container flex items-center justify-center h-100">
-        <ClipLoader color="blue" loading={loading} size={50} aria-label="Loading Spinner" />
-    </div>)
+    if (loading) return (
+        <Loading />
+    )
 
-    if (error) return (<div>Ocorreu um erro ao carregar </div>)
+    if (error) return (<ErrorMessage />)
     if (!produtos) return null;
 
     return (

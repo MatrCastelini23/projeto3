@@ -17,7 +17,7 @@ const banner = [
 
 
 function Main() {
-    const [idbanner, setidbanner] = useState(0);
+    const [idBanner, setidbanner] = useState(0);
     const goBack = () => (
         setidbanner((prev) => (prev - 1 + banner.length) % banner.length)
     );
@@ -30,8 +30,8 @@ function Main() {
         <>
             <div className="relative w-full overflow-hidden shadow-lg select-none aspect-[1536-507]">
                 <div
-                    className="flex transtion-transform durantion-500 ease-in-out"
-                    style={{ transform: `translateX(-${idbanner * 100}%)` }}
+                    className="flex transition-transform duration-500 ease-in-out"
+                    style={{ transform: `translateX(-${idBanner * 100}%)` }}
                 >
                     {banner.map((b) => (
                         <div
@@ -70,7 +70,7 @@ function Main() {
                         <button
                             key={i}
                             onClick={() => setidbanner(i)}
-                            className={`w-2.5 h-2.5 rounded-full transition-all duration-200 ${i === idbanner ? "bg-white w-6 " : "bg-white/50"}`}
+                            className={`w-2.5 h-2.5 rounded-full transition-all duration-200 ${i === idBanner ? "bg-white w-6 " : "bg-white/50"}`}
                         />
                     ))}
                 </div>

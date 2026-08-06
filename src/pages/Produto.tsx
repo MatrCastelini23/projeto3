@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
-import useFetchProduto from "../services/apiProduto";
-import { ClipLoader } from "react-spinners";
-import ImagemProduto from "../components/ImagemProduto";
+import useFetchProduto from "../api/apiProduto";
+import Loading from "../components/screenEffect/Loading";
+import ErrorMessage from "../components/screenMessages/ErrorMessage"
 
 
 function Produto() {
@@ -9,15 +9,11 @@ function Produto() {
     const { produto, loading, error } = useFetchProduto(Number(produtoId));
 
     if (loading) return (
-        <div>
-            <ClipLoader />
-        </div>
+        <Loading />
     )
 
     if (error) return (
-        <div>
-            <h1>Erro ao carregar produtos</h1>
-        </div>
+        <ErrorMessage />
     )
 
     if (!produto) return (
